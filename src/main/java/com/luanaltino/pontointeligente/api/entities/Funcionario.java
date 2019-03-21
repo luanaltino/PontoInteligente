@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,15 +46,12 @@ public class Funcionario implements Serializable {
 	@Column(name = "cpf", nullable = false)
 	private String cpf;
 
-	@Transient
 	@Column(name = "valor_hora", nullable = false)
 	private BigDecimal valorHora;
 
-	@Transient
 	@Column(name = "qtd_horas_trabalho_dia", nullable = false)
 	private Float qtdHorasTrabalhoDia;
 
-	@Transient
 	@Column(name = "qtd_horas_almoco", nullable = false)
 	private Float qtdHorasAlmoco;
 
@@ -188,6 +186,21 @@ public class Funcionario implements Serializable {
 	public void setLancamentos(List<Lancamento> lancamentos) {
 		this.lancamentos = lancamentos;
 	}
+	
+	@Transient
+	public Optional<Float> getQtdHorasTrabalhoDiaOpt() {
+		return Optional.ofNullable(qtdHorasTrabalhoDia);
+	}
+	
+	@Transient
+	public Optional<Float> getQtdHorasAlmocoOpt() {
+		return Optional.ofNullable(qtdHorasAlmoco);
+	}
+	
+	@Transient
+	public Optional<BigDecimal> getValorHoraOpt() {
+		return Optional.ofNullable(valorHora);
+	}
 
 	@Override
 	public String toString() {
@@ -195,8 +208,6 @@ public class Funcionario implements Serializable {
 				+ ", valorHora=" + valorHora + ", qtdHorasTrabalhoDia=" + qtdHorasTrabalhoDia + ", qtdHorasAlmoco="
 				+ qtdHorasAlmoco + ", perfil=" + perfil + ", dataCriacao=" + dataCriacao + ", dataAtualização="
 				+ dataAtualização + ", empresa=" + empresa + ", lancamentos=" + lancamentos + "]";
-	}
-	
-	
+	}	
 
 }
